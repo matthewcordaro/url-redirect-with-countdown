@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <script type="text/javascript">
+        /*
+         Edit these variables for your use case.
+         */
+        var redirectURL = "https://github.com/matthewcordaro/url-redirect-with-countdown"
+        var timeInSec = 10;
+
+        function timer(time,update) {
+            var start = new Date().getTime();
+            var interval = setInterval(function() {
+                var now = time-(new Date().getTime()-start);
+                if( now <= 0) {
+                    clearInterval(interval);
+                    window.location=redirectURL;
+                }
+                else update(Math.floor(now/1000)+1);
+            },100); // the smaller this number, the more accurate the timer will be
+        }
+        timer(
+                timeInSec * 1000, // convert to milliseconds
+                function(timeleft) { // called every step to update the visible countdown
+                    document.getElementById('timer').innerHTML = timeleft;
+                }
+        );
+    </script>
+    <style>
+        .center {
+            width:800px;
+            border-radius: 5px;
+            background:#ccc;
+            padding:10px;
+            position:absolute;
+            margin-top:-25px;
+            margin-left:-400px;
+            top:50%;
+            left:50%;
+            display: table;
+            text-align: center;
+        }
+        .middle{
+            display: table-cell;
+            vertical-align: middle;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>MMC </title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<section class="center">
+    <div class="middle">
+        This site has moved.<br />
+        Please update your bookmark.<br /><br />
+        We will automatically redirect you in <span id="timer"></span> second(s).
+    </div>
+</section>
+</body>
+</html>
